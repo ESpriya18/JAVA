@@ -29,7 +29,7 @@ public class CancelTicket {
 				System.out.println("Enter ticket id ");
 				cancellationTicketId = scanner.nextInt();
 				
-				detailOfpassenger = statement.executeQuery("select *from passengerDetail where ticketId = "+cancellationTicketId);
+				detailOfpassenger = statement.executeQuery("select *from passengedetails where ticketId = "+cancellationTicketId);
 				
 				detailOfpassenger.next();
 				
@@ -47,7 +47,7 @@ public class CancelTicket {
 				int updateBookingSeats = nowBookingSeats - calculateTicket;
 				
 				
-				checkCancelOrNot = statement.executeUpdate("delete from passengerDetail where ticketId = "+cancellationTicketId+" and mailId = '"+cancellationMailId+"'");
+				checkCancelOrNot = statement.executeUpdate("delete from passengerdetails where ticketId = "+cancellationTicketId+" and mailId = '"+cancellationMailId+"'");
 				if(checkCancelOrNot==1)
 				{
 					System.out.println("Your ("+calculateTicket+")Ticket cancellation is successful.");
@@ -78,7 +78,7 @@ public class CancelTicket {
 	private void waitingListToPassengerList(int flightId, int totalBookingTicket, int ticketPrice)
 	{
 		try {
-			ResultSet waitingList = statement.executeQuery("select *from waitingList where flightId = "+flightId+" and ticketCount <= "+(50-totalBookingTicket));
+			ResultSet waitingList = statement.executeQuery("select *from waitinglist where flightId = "+flightId+" and ticketCount <= "+(50-totalBookingTicket));
 			
 			if(!waitingList.next())
 			{
@@ -93,10 +93,10 @@ public class CancelTicket {
 			
 			int totalPrice = ticketCount*ticketPrice;
 			
-			int insertPassengerDetais = statement.executeUpdate("insert into passengerDetail values ('"+passengerName+"','"+passengerMailId+"',"+0+","+flightId+","+totalPrice+",'"+classes+"')");
+			int insertPassengerDetais = statement.executeUpdate("insert into passengerdetails values ('"+passengerName+"','"+passengerMailId+"',"+0+","+flightId+","+totalPrice+",'"+classes+"')");
 			if(insertPassengerDetais==1)
 			{
-				int deleteWaitingList = statement.executeUpdate("delete from waitingList where passengerName = '"+passengerName+"' and mailId = '"+passengerMailId+"'");
+				int deleteWaitingList = statement.executeUpdate("delete from waitinglist where passengerName = '"+passengerName+"' and mailId = '"+passengerMailId+"'");
 				if(deleteWaitingList==1)
 				{
 					System.out.println(passengerName+" : your ticket is booked ");
