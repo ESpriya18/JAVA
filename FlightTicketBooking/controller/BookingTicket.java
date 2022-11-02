@@ -20,7 +20,7 @@ public class BookingTicket {
 			String fromCity = scanner.next();
 			System.out.println("You are Going to..?");
 			String toCity = scanner.next();
-			String fromAndTo = fromCity+" - "+toCity;
+			String fromAndTo = fromCity+"-"+toCity;
 			
 			ResultSet findFlight = statement.executeQuery("select *from flightdetails where travelFromAndTo = '"+fromAndTo+"'");
 	
@@ -80,7 +80,7 @@ public class BookingTicket {
 			int businessClassPrice = (findFlight.getInt(6)/100 * 25)+findFlight.getInt(6);
 			int ticketPrice = whichClass.equals("Business")?countTicket*businessClassPrice:countTicket*findFlight.getInt(6);
 					
-			int booked = statement.executeUpdate("insert into passengerDetail values ('"+passengerName+"','"+passengerMailId+"',"+0+","+findFlight.getInt(1)+","+ticketPrice+",'"+whichClass+"')");
+			int booked = statement.executeUpdate("insert into passengerdetails values ('"+passengerName+"','"+passengerMailId+"',"+0+","+findFlight.getInt(1)+","+ticketPrice+",'"+whichClass+"')");
 			if(booked==1)
 				System.out.println("Booked successfully..."
 						+ "You will check your ticket on a Passenger Details...");
@@ -102,7 +102,7 @@ public class BookingTicket {
 	private void waitingList(String passengerName, String passengerMailId,int flightId, int ticketCount, String classes) throws ClassNotFoundException, SQLException 
 	{
 		Statement statement = JdbcConnectionClass.getInstance().createStatement();
-		int addWaitingList = statement.executeUpdate("insert into waitingList values ('"+passengerName+"','"+passengerMailId+"',"+flightId+","+ticketCount+",'"+classes+"')");
+		int addWaitingList = statement.executeUpdate("insert into waitinglist values ('"+passengerName+"','"+passengerMailId+"',"+flightId+","+ticketCount+",'"+classes+"')");
 		if(addWaitingList==1)
 		{
 			System.out.println("Please often check in Passenger Details List section...");
