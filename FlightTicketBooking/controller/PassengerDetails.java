@@ -29,7 +29,7 @@ public class PassengerDetails {
 			mailId = scanner.next();
 
 			try {
-				passengerDetails = statement.executeQuery("select *from passengerDetail where mailId = '"+mailId+"'");
+				passengerDetails = statement.executeQuery("select *from passengerdetails where mailId = '"+mailId+"'");
 				break;
 			}
 			catch(Exception e)
