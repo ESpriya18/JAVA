@@ -2,12 +2,18 @@ package view;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.logging.Logger;
+
 
 import controller.*;
 
 public class FlightTIcketBookingManagement {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
+	
+	 
+	public static void main(String[] args) throws ClassNotFoundException,SQLException {
+		
+   
+    
 		FlightTicket bookTicket = new FlightTicket();
 		bookTicket.flightTicketBooking();
 	}
@@ -15,20 +21,37 @@ public class FlightTIcketBookingManagement {
 }
 class FlightTicket  
 {
+	 Logger logger=Logger.getLogger(FlightTicket.class.getName());
 	private Scanner scanner = new Scanner(System.in);
 	protected void flightTicketBooking() 
 	{
+//		logger.setLevel(Level.FINE);
+//		logger.fine("welcome to booking Flight");
 		System.out.println("Welcome to Booking Flight Ticket");
+//		
+//		Logger.getLogger("----------------------------------");
 		System.out.println("--------------------------------");
 		while(true)
 		{
+//			logger.info("1.view flight details");
 			System.out.println("1. View Flight Details");
+			
+//			logger.info("2.Book Ticket");
 			System.out.println("2. Book Ticket");
+			
+//			logger.info("3.Cancel Ticket");
 			System.out.println("3. Cancel Ticket");
+			
+//			logger.info("4.Show Passenger Ticket Details");
 			System.out.println("4. Show Passenger Ticket Details");
-			System.out.println("5. Waiting List Details");
+			
+//			logger.info("5.To check available flights");
+			System.out.println("5. Flight Availability Details");
+			
+//			logger.info("6.Exit");
 			System.out.println("6. Exit");
-
+			
+//			logger.info("Enter your option");
 			System.out.println("Enter your option");
 			int choice = scanner.nextInt();
 			
@@ -58,8 +81,8 @@ class FlightTicket
 				passengerDetail.showPassengerDetails();
 				break;
 			case 5:
-				WaitingListDetails waitingList = new WaitingListDetails();
- 				waitingList.waitingListDeatils();
+				FlightAvailability flightAvailability = new FlightAvailability();
+ 				flightAvailability.availableFlights();
 				break;
 			case 6:
 				return;
